@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dailyscoop/page/news_webview.dart';
 import 'package:flutter/material.dart';
 
 import '../data/Api_call.dart';
 import '../model/article.dart';
 
 class NewsWidget extends StatefulWidget {
-  const NewsWidget({Key key}) : super(key: key);
+  final String cat;
+  NewsWidget(@required this.cat);
 
   @override
   State<NewsWidget> createState() => _NewsWidgetState();
@@ -22,9 +24,8 @@ class _NewsWidgetState extends State<NewsWidget> {
   }
 
   getNews() async {
-    GetApiData obj = GetApiData();
+    GetApiData obj = GetApiData(widget.cat);
     newsArticle = await obj.getApiData();
-    print(newsArticle);
     setState(() {
       _loading = false;
     });
@@ -43,35 +44,71 @@ class _NewsWidgetState extends State<NewsWidget> {
             physics: const ClampingScrollPhysics(),
             itemCount: newsArticle.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: Container(
-                  margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(10),
-                  child: Column(children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: newsArticle[index].imageUrl,
-                        height: 180,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+              return Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: InkWell(
+                  /////////
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewsWebview(
+                          postUrl: newsArticle[index].url,
+                        ),
                       ),
+                    );
+                  },
+                  /////////
+                  splashColor: Colors.black54,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      child: Column(children: <Widget>[
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: newsArticle[index].imageUrl,
+                            height: 200,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 3,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 3,
+                            horizontal: 8,
+                          ),
+                          child: Text(
+                            newsArticle[index].title,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        newsArticle[index].description.length == 0
+                            ? const Center()
+                            : Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 3),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  newsArticle[index].description,
+                                  maxLines: 3,
+                                  style: const TextStyle(color: Colors.black54),
+                                ),
+                              ),
+                      ]),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      newsArticle[index].title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    Text(newsArticle[index].description),
-                  ]),
+                  ),
                 ),
               );
             },

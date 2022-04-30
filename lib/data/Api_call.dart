@@ -3,9 +3,21 @@ import '../model/article.dart';
 import 'package:http/http.dart' as http;
 
 class GetApiData {
-  static Uri url = Uri.parse(
+  String category;
+
+  Uri url = Uri.parse(
       "https://newsapi.org/v2/top-headlines?country=in&apiKey=7a6ad3304e334bb28195f924a6298618");
 
+  GetApiData(this.category) {
+    if (category == "") {
+    } else if (category == "anime") {
+      url = Uri.parse(
+          "https://newsapi.org/v2/everything?q=anime&apiKey=7a6ad3304e334bb28195f924a6298618");
+    } else {
+      url = Uri.parse(
+          "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=7a6ad3304e334bb28195f924a6298618");
+    }
+  }
   Future<List<Article>> getApiData() async {
     var response = await http.get(url);
     var jsonData = jsonDecode(response.body);
@@ -26,7 +38,7 @@ class GetApiData {
         }
       }
     }
-    print(articleList);
+    //print(articleList);
     return articleList;
   }
 }
