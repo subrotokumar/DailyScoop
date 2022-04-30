@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dailyscoop/page/news_webview.dart';
 import 'package:flutter/material.dart';
 
-import '../data/Api_call.dart';
+import '../data/api_call.dart';
 import '../model/article.dart';
+import '../page/news_webview.dart';
 
 class NewsWidget extends StatefulWidget {
   final String cat;

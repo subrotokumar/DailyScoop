@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dailyscoop/page/home.dart';
-import 'package:dailyscoop/widgets/news_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
+import '../page/home.dart';
 import '../data/meta_data.dart';
 
 class CategoriesWidget extends StatelessWidget {
