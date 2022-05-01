@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'dart:async';
 
@@ -72,10 +73,12 @@ class _NewsWebviewState extends State<NewsWebview> {
           ],
         ),
         actions: <Widget>[
-          Opacity(
-            opacity: 0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: InkWell(
+              onTap: () {
+                Share.share(widget.postUrl);
+              },
               child: const Icon(
                 Icons.share,
               ),
