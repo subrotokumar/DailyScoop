@@ -12,7 +12,7 @@ class GetApiData {
     if (category == "") {
     } else if (category == "anime") {
       url = Uri.parse(
-          "https://newsapi.org/v2/everything?q=tesla&from=2022-04-01&sortBy=publishedAt&apiKey=7a6ad3304e334bb28195f924a6298618");
+          "https://newsapi.org/v2/everything?q=anime&sortBy=relevancy&language=en&apiKey=7a6ad3304e334bb28195f924a6298618");
     } else {
       url = Uri.parse(
           "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=7a6ad3304e334bb28195f924a6298618");
