@@ -8,9 +8,8 @@
 <p align="center"><a href="https://github.com/subrotokumar/DailyScoop/releases"> <img width="100px" src="./asset/meta/download.png"> </a></p>
 <p align="center">
 <a href="https://github.com/subrotokumar/DailyScoop" alt="GitHub release"><img width="80px" src="https://img.shields.io/badge/version-0.1.0-blue.svg" ></a>
-<hr>
 
-## Screenshot 
+### Screenshot 
 
 <p align="center">
 <img height="400px" margin="50px" src="./asset/meta/ss1.jpg">
